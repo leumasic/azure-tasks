@@ -1,0 +1,31 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+  "id": "4cc114d4-7573-49ae-b4e8-0810003010e3",
+  "name": "azure-changeset-task",
+  "friendlyName": "Azure Changeset Task",
+  "description": "Task for Azure Pipeline that acts as a drop-in replacement for the Changeset Github Action.",
+  "helpMarkDown": "",
+  "category": "Utility",
+  "author": "leumasic <leumasic@outlook.com>",
+  "version": {
+    "Major": 0,
+    "Minor": 1,
+    "Patch": 0
+  },
+  "instanceNameFormat": "Echo $(samplestring)",
+  "inputs": [
+    {
+      "name": "samplestring",
+      "type": "string",
+      "label": "Sample String",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "A sample string"
+    }
+  ],
+  "execution": {
+    "Node10": {
+      "target": "index.js"
+    }
+  }
+}

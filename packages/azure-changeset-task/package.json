@@ -2,6 +2,7 @@
   "name": "azure-changeset-task",
   "version": "0.0.1",
   "description": "Azure Task Equivalent to Changeset Github Action",
+  "author": "leumasic <leumasic@outlook.com>",
   "type": "module",
   "repository": {
     "type": "git",
@@ -13,11 +14,9 @@
     "require": "./dist/index.cjs"
   },
   "scripts": {
-    "build": "NODE_ENV='production' tsup",
-    "build:dev": "NODE_ENV='development' tsup"
+    "build": "tsc"
   },
   "devDependencies": {
-    "@types/node": "^18.7.23",
-    "tsup": "^6.2.3"
+    "@types/node": "^18.7.23"
   }
 }
