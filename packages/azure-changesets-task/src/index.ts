@@ -1,4 +1,4 @@
-import tl from 'azure-pipelines-task-lib/task';
+import tl from "azure-pipelines-task-lib/task";
 import fs from "fs-extra";
 import * as gitUtils from "./gitUtils";
 import { runPublish, runVersion } from "./run";
@@ -9,7 +9,10 @@ async function run() {
     const githubToken = process.env.GITHUB_TOKEN;
 
     if (!githubToken) {
-      tl.setResult(tl.TaskResult.Failed, "Please add the GITHUB_TOKEN to the changesets task");
+      tl.setResult(
+        tl.TaskResult.Failed,
+        "Please add the GITHUB_TOKEN to the changesets task"
+      );
       return;
     }
 
@@ -49,15 +52,19 @@ async function run() {
       case !hasChangesets && !hasPublishScript:
         console.log("No changesets found");
         return;
+
       case !hasChangesets && hasPublishScript: {
         console.log(
-          "No changesets found, attempting to publish any unpublished packages to npm"
+          "No changesets found, attempting to publish any unpublished packages"
         );
 
         const userNpmrcPath = `${process.env.HOME}/.npmrc`;
         if (fs.existsSync(userNpmrcPath)) {
           console.log("Found existing user .npmrc file");
-          const userNpmrcContent: string = await fs.readFile(userNpmrcPath, "utf8");
+          const userNpmrcContent: string = await fs.readFile(
+            userNpmrcPath,
+            "utf8"
+          );
           const authLine = userNpmrcContent.split("\n").find((line) => {
             // check based on https://github.com/npm/cli/blob/8f8f71e4dd5ee66b3b17888faad5a7bf6c657eed/test/lib/adduser.js#L103-L105
             return /^\s*\/\/registry\.npmjs\.org\/:[_-]authToken=/i.test(line);
@@ -100,9 +107,11 @@ async function run() {
 
         return;
       }
+
       case hasChangesets && !hasNonEmptyChangesets:
         console.log("All changesets are empty; not creating PR");
         return;
+
       case hasChangesets: {
         const { pullRequestNumber } = await runVersion({
           script: tl.getInput("version"),
@@ -117,16 +126,7 @@ async function run() {
         return;
       }
     }
-    const inputString: string | undefined = tl.getInput('samplestring', true);
-
-    if (inputString === 'bad') {
-      tl.setResult(tl.TaskResult.Failed, 'Bad input was given');
-      return;
-    }
-
-    console.log('Hello', inputString);
-  }
-  catch (err) {
+  } catch (err) {
     console.error(err);
     tl.setResult(tl.TaskResult.Failed, (err as any).message);
   }

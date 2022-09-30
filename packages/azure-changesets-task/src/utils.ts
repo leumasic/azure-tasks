@@ -1,4 +1,4 @@
-import tl from 'azure-pipelines-task-lib/task';
+import tl from "azure-pipelines-task-lib/task";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
@@ -127,7 +127,8 @@ export function sortTheThings(
   return -1;
 }
 
-export const getVariableErrorMsg = (predefVar: string) => `Microsoft's ${predefVar} predefined variable(s) just got deprecated. Submit an issue to this task's repo.`;
+export const getVariableErrorMsg = (predefVar: string) =>
+  `Microsoft's ${predefVar} predefined variable(s) just got deprecated. Submit an issue to this task's repo.`;
 
 interface IRepoOwner {
   repo: string;
@@ -139,13 +140,15 @@ export function getRepoOwnerObject(): IRepoOwner {
   if (!ownerSlashRepo)
     throw new Error(getVariableErrorMsg("Build.Repository.Name"));
 
-  const [repo, owner] = ownerSlashRepo.split('/');
+  const [repo, owner] = ownerSlashRepo.split("/");
 
   if (!repo || !owner)
-    throw new Error("Microsoft's Build.Repository.Name predefined variable changed. Submit an issue to this task's repo.");
+    throw new Error(
+      "Microsoft's Build.Repository.Name predefined variable changed. Submit an issue to this task's repo."
+    );
 
   return {
     repo,
-    owner
+    owner,
   };
 }

@@ -2,11 +2,7 @@ import { exec } from "azure-pipelines-task-lib";
 import { execWithOutput } from "./utils";
 
 export const setupUser = async () => {
-  await exec("git", [
-    "config",
-    "user.name",
-    `"github-actions[bot]"`,
-  ]);
+  await exec("git", ["config", "user.name", `"github-actions[bot]"`]);
   await exec("git", [
     "config",
     "user.email",

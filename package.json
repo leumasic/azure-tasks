@@ -10,7 +10,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "eslint .",
-    "format": "prettier --write .",
+    "format": "prettier --write . --ignore ./pnpm-lock.yaml",
     "test": "turbo run test"
   },
   "devDependencies": {

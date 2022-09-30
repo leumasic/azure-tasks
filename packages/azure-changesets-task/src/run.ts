@@ -1,5 +1,5 @@
-import tl  from 'azure-pipelines-task-lib/task';
-import { exec } from 'azure-pipelines-task-lib'
+import tl from "azure-pipelines-task-lib/task";
+import { exec } from "azure-pipelines-task-lib";
 import { Octokit } from "@octokit/rest";
 import fs from "fs-extra";
 import { getPackages, Package } from "@manypkg/get-packages";
@@ -36,7 +36,10 @@ const createRelease = async (
 
     const changelog = await fs.readFile(changelogFileName, "utf8");
 
-    const changelogEntry = getChangelogEntry(changelog, pkg.packageJson.version);
+    const changelogEntry = getChangelogEntry(
+      changelog,
+      pkg.packageJson.version
+    );
     if (!changelogEntry) {
       // we can find a changelog but not the entry for this version
       // if this is true, something has probably gone wrong
@@ -50,7 +53,7 @@ const createRelease = async (
       tag_name: tagName,
       body: changelogEntry.content,
       prerelease: pkg.packageJson.version.includes("-"),
-      ...repoOwnerObject
+      ...repoOwnerObject,
     });
   } catch (err: any) {
     // if we can't find a changelog, the user has probably disabled changelogs
@@ -85,7 +88,7 @@ export async function runPublish({
   cwd = process.cwd(),
 }: PublishOptions): Promise<PublishResult> {
   const octokit = new Octokit({
-    auth: githubToken
+    auth: githubToken,
   });
   const [publishCommand, ...publishArgs] = script.split(/\s+/);
 
@@ -102,7 +105,9 @@ export async function runPublish({
 
   if (tool !== "root") {
     const newTagRegex = /New tag:\s+(@[^/]+\/[^@]+|[^/]+)@([^\s]+)/;
-    const packagesByName = new Map(packages.map((x) => [x.packageJson.name, x]));
+    const packagesByName = new Map(
+      packages.map((x) => [x.packageJson.name, x])
+    );
 
     for (const line of changesetPublishOutput.stdout.split("\n")) {
       const match = line.match(newTagRegex);
@@ -279,11 +284,15 @@ export async function runVersion({
   const commitId = tl.getVariable("Build.SourceVersion");
 
   if (!repo || !branch || !commitId)
-    throw new Error(getVariableErrorMsg("Build.Repository.Name, Build.SourceBranchName, Build.SourceVersion"));
+    throw new Error(
+      getVariableErrorMsg(
+        "Build.Repository.Name, Build.SourceBranchName, Build.SourceVersion"
+      )
+    );
 
   const versionBranch = `changeset-release/${branch}`;
   const octokit = new Octokit({
-    auth: githubToken
+    auth: githubToken,
   });
   const { preState } = await readChangesetState(cwd);
 
@@ -317,7 +326,10 @@ export async function runVersion({
         "utf8"
       );
 
-      const entry = getChangelogEntry(changelogContents, pkg.packageJson.version);
+      const entry = getChangelogEntry(
+        changelogContents,
+        pkg.packageJson.version
+      );
       return {
         highestLevel: entry.highestLevel,
         private: !!pkg.packageJson.private,
@@ -361,7 +373,7 @@ export async function runVersion({
       head: versionBranch,
       title: finalPrTitle,
       body: prBody,
-      ...repoOwnerObject
+      ...repoOwnerObject,
     });
 
     return {
@@ -375,7 +387,7 @@ export async function runVersion({
       pull_number: pullRequest.number,
       title: finalPrTitle,
       body: prBody,
-      ...repoOwnerObject
+      ...repoOwnerObject,
     });
 
     return {

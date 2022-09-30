@@ -64,7 +64,7 @@
       "name": "createGithubReleases",
       "type": "boolean",
       "label": "Create Github Releases",
-      "helpMarkDown":"A boolean value to indicate whether to create Github releases after `publish` or not",
+      "helpMarkDown": "A boolean value to indicate whether to create Github releases after `publish` or not",
       "defaultValue": true,
       "required": false
     }
