@@ -1,1 +1,1 @@
-# Changeset task for azure pipelines
+# A Collection of Azure Pipeline Tasks
