@@ -1,0 +1,44 @@
+{
+  "name": "azure-changesets-task",
+  "version": "0.0.1",
+  "description": "An Azure Pipeline Task to automate releases with Changesets",
+  "author": "leumasic <leumasic@outlook.com>",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leumasic/azure-tasks.git",
+    "directory": "packages/azure-changesets-task"
+  },
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^18.7.23",
+    "@types/q": "^1.5.5",
+    "@types/semver": "^7.3.12",
+    "mocha": "^10.0.0",
+    "sync-request": "^6.1.0"
+  },
+  "dependencies": {
+    "@changesets/changelog-github": "^0.4.6",
+    "@changesets/pre": "^1.0.12",
+    "@changesets/read": "^0.5.7",
+    "@changesets/types": "^5.1.0",
+    "@changesets/write": "^0.2.0",
+    "@manypkg/get-packages": "^1.1.3",
+    "@octokit/rest": "^19.0.4",
+    "fs-extra": "^10.1.0",
+    "remark-parse": "^10.0.1",
+    "remark-stringify": "^10.0.2",
+    "resolve-from": "^5.0.0",
+    "semver": "^7.3.7",
+    "unified": "^10.1.2"
+  }
+}
