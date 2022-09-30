@@ -2,7 +2,6 @@ import tl from "azure-pipelines-task-lib/task";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
-// @ts-ignore
 import mdastToString from "mdast-util-to-string";
 import { exec } from "azure-pipelines-task-lib";
 import { getPackages, Package } from "@manypkg/get-packages";
@@ -53,7 +52,7 @@ export function getChangelogEntry(changelog: string, version: string) {
   for (let i = 0; i < nodes.length; i++) {
     const node = nodes[i];
     if (node.type === "heading") {
-      const stringified: string = mdastToString(node);
+      const stringified: string = mdastToString.toString(node);
       const match = stringified.toLowerCase().match(/(major|minor|patch)/);
       if (match !== null) {
         const level = BumpLevels[match[0] as "major" | "minor" | "patch"];
