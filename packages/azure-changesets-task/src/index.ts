@@ -6,12 +6,18 @@ import readChangesetState from "./readChangesetState";
 
 async function run() {
   try {
-    const githubToken = process.env.GITHUB_TOKEN;
+    const connection = tl.getInput("githubConnection", true);
+    const githubToken = tl.getEndpointAuthorizationParameter(
+      connection!,
+      "AccessToken",
+      false
+    );
 
     if (!githubToken) {
       tl.setResult(
         tl.TaskResult.Failed,
-        "Please add the GITHUB_TOKEN to the changesets task"
+        `Github token undefined` +
+          "This is probably a bug in the task, please open an issue"
       );
       return;
     }
@@ -92,7 +98,7 @@ async function run() {
         }
 
         const result = await runPublish({
-          script: publishScript,
+          script: publishScript!,
           githubToken,
           createGithubReleases: tl.getBoolInput("createGithubReleases"),
         });
