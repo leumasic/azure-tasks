@@ -5,6 +5,7 @@ import remarkStringify from "remark-stringify";
 import mdastToString from "mdast-util-to-string";
 import { exec } from "azure-pipelines-task-lib";
 import { getPackages, Package } from "@manypkg/get-packages";
+import stream from "stream";
 
 export const BumpLevels = {
   dep: 0,
@@ -95,19 +96,31 @@ export async function execWithOutput(
   let myOutput = "";
   let myError = "";
 
-  return {
-    code: await exec(command, args, {
-      // listeners: {
-      //   stdout: (data: Buffer) => {
-      //     myOutput += data.toString();
-      //   },
-      //   stderr: (data: Buffer) => {
-      //     myError += data.toString();
-      //   },
-      // },
+  const outStream = new stream.Writable({
+    write(chunk, encoding, callback) {
+      const chunkString = chunk.toString();
+      console.log(chunkString);
+      myOutput += chunkString;
+      callback();
+    },
+  });
+  const errStream = new stream.Writable({
+    write(chunk, encoding, callback) {
+      const chunkString = chunk.toString();
+      console.log(chunkString);
+      myError += chunkString;
+      callback();
+    },
+  });
 
-      ...options,
-    }),
+  const code = await exec(command, args, {
+    outStream,
+    errStream,
+    ...options,
+  });
+
+  return {
+    code,
     stdout: myOutput,
     stderr: myError,
   };
