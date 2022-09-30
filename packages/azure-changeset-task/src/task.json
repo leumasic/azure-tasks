@@ -1,10 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
   "id": "4cc114d4-7573-49ae-b4e8-0810003010e3",
-  "name": "azure-changeset-task",
+  "name": "Changesets",
   "friendlyName": "Azure Changeset Task",
-  "description": "Task for Azure Pipeline that acts as a drop-in replacement for the Changeset Github Action.",
-  "helpMarkDown": "",
+  "description": "An Azure Pipeline Task to automate releases with Changesets",
+  "helpMarkDown": "An Azure Pipeline Task to automate releases with Changesets",
   "category": "Utility",
   "author": "leumasic <leumasic@outlook.com>",
   "version": {
@@ -12,19 +12,83 @@
     "Minor": 1,
     "Patch": 0
   },
-  "instanceNameFormat": "Echo $(samplestring)",
+  "instanceNameFormat": "Changesets",
   "inputs": [
     {
-      "name": "samplestring",
+      "name": "publish",
       "type": "string",
-      "label": "Sample String",
-      "defaultValue": "",
-      "required": true,
-      "helpMarkDown": "A sample string"
+      "label": "Publish Command",
+      "helpMarkDown": "The command to use to build and publish packages",
+      "required": false
+    },
+    {
+      "name": "version",
+      "type": "string",
+      "label": "Version Command",
+      "helpMarkDown": "The command to update version, edit CHANGELOG, read and delete changesets. Defaults to `changeset version` if not provided",
+      "defaultValue": "changeset version",
+      "required": false
+    },
+    {
+      "name": "cwd",
+      "type": "string",
+      "label": "Cwd",
+      "helpMarkDown": "Sets the cwd for the node process. Defaults to `process.cwd()`",
+      "required": false
+    },
+    {
+      "name": "commit",
+      "type": "string",
+      "label": "Commit Message",
+      "helpMarkDown": "The commit message. Defaults to `Version Packages`",
+      "defaultValue": "Version Packages",
+      "required": false
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "label": "Pull Request Title",
+      "helpMarkDown": "The pull request title. Defaults to `Version Packages`",
+      "defaultValue": "Version Packages",
+      "required": false
+    },
+    {
+      "name": "setupGitUser",
+      "type": "boolean",
+      "label": "Setup Git User",
+      "helpMarkDown": "Sets up the git user for commits as `'github-actions[bot]'`. Defaults to `true`",
+      "defaultValue": true,
+      "required": false
+    },
+    {
+      "name": "createGithubReleases",
+      "type": "boolean",
+      "label": "Create Github Releases",
+      "helpMarkDown":"A boolean value to indicate whether to create Github releases after `publish` or not",
+      "defaultValue": true,
+      "required": false
+    }
+  ],
+  "outputVariables": [
+    {
+      "name": "published",
+      "description": "A boolean value to indicate whether a publishing is happened or not"
+    },
+    {
+      "name": "publishedPackages",
+      "description": "A JSON array to present the published packages. The format is `[{'name': '@xx/xx', 'version': '1.2.0'}, {'name': '@xx/xy', 'version': '0.8.9'}]`"
+    },
+    {
+      "name": "hasChangesets",
+      "description": "A boolean about whether there were changesets. Useful if you want to create your own publishing functionality."
+    },
+    {
+      "name": "pullRequestNumber",
+      "description": "The pull request number that was created or updated"
     }
   ],
   "execution": {
-    "Node10": {
+    "Node": {
       "target": "index.js"
     }
   }
