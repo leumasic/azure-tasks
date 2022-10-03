@@ -1,6 +1,6 @@
 {
   "manifestVersion": 1,
-  "id": "tothegist-build-tasks",
+  "id": "build-tasks",
   "name": "Tothegist Pipeline Tasks",
   "version": "0.0.1",
   "publisher": "tothegist",
