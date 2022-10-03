@@ -35,12 +35,6 @@ async function run() {
       await gitUtils.setupUser();
     }
 
-    console.log("setting GitHub credentials");
-    await fs.writeFile(
-      `${process.env.HOME}/.netrc`,
-      `machine github.com\nlogin github-actions[bot]\npassword ${githubToken}`
-    );
-
     const { changesets } = await readChangesetState();
     const hasChangesets = changesets.length !== 0;
     const hasNonEmptyChangesets = changesets.some(
@@ -119,11 +113,20 @@ async function run() {
         return;
 
       case hasChangesets: {
+        const prTitle = tl.getInput("title");
+        const commitMessage = tl.getInput("commit");
+
+        if (!prTitle || !commitMessage)
+          throw new Error(
+            `title and commit task variables not defined.` +
+              "This is probably a bug in the task, please open an issue"
+          );
+
         const { pullRequestNumber } = await runVersion({
           script: tl.getInput("version"),
           githubToken,
-          prTitle: tl.getInput("title"),
-          commitMessage: tl.getInput("commit"),
+          prTitle,
+          commitMessage,
           hasPublishScript,
         });
 
