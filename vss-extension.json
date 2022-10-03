@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
-    "id": "build-release-task",
-    "name": "Azure Changesets",
+    "id": "tothegist-build-tasks",
+    "name": "Tothegist Pipeline Tasks",
     "version": "0.0.1",
     "publisher": "tothegist",
     "targets": [
@@ -13,23 +13,20 @@
     "categories": [
         "Azure Pipelines"
     ],
-    "icons": {
-        "default": "images/extension-icon.png"
-    },
     "files": [
         {
-            "path": "src"
+            "path": "packages/changesets-task"
         }
     ],
     "contributions": [
         {
-            "id": "custom-build-release-task",
+            "id": "changesets-release-task",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "src"
+                "name": "packages/changesets-task"
             }
         }
     ]

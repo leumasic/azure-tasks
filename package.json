@@ -17,7 +17,6 @@
     "@changesets/cli": "^2.24.4",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
-    "azure-pipelines-task-lib": "4.0.0-preview",
     "esbuild": "^0.15.10",
     "eslint": "^8.24.0",
     "eslint-config-prettier": "latest",

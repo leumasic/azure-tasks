@@ -1,5 +1,5 @@
 {
-  "name": "azure-changesets-task",
+  "name": "changesets-task",
   "version": "0.0.1",
   "description": "An Azure Pipeline Task to automate releases with Changesets",
   "author": "leumasic <leumasic@outlook.com>",
@@ -7,10 +7,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/leumasic/azure-tasks.git",
-    "directory": "packages/azure-changesets-task"
-  },
-  "scripts": {
-    "build": "tsc"
+    "directory": "packages/changesets-task"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
@@ -26,6 +23,7 @@
     "@changesets/write": "^0.2.0",
     "@manypkg/get-packages": "^1.1.3",
     "@octokit/rest": "^19.0.4",
+    "azure-pipelines-task-lib": "4.0.0-preview",
     "fs-extra": "^10.1.0",
     "mdast-util-to-string": "^3.1.0",
     "remark-parse": "^10.0.1",
