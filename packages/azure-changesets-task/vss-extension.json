@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
     "id": "build-release-task",
-    "name": "Azure Changeset Task",
+    "name": "Azure Changesets",
     "version": "0.0.1",
     "publisher": "tothegist",
     "targets": [
