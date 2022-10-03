@@ -1,10 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": ["src"],
+  "include": ["index.ts"],
   "compilerOptions": {
     "allowJs": true,
     "module": "ES2020",
-    "outDir": "./dist",
     "target": "ES2020"
   }
 }
