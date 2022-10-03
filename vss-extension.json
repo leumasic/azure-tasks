@@ -1,33 +1,33 @@
 {
-    "manifestVersion": 1,
-    "id": "tothegist-build-tasks",
-    "name": "Tothegist Pipeline Tasks",
-    "version": "0.0.1",
-    "publisher": "tothegist",
-    "targets": [
-        {
-            "id": "Microsoft.VisualStudio.Services"
-        }
-    ],
-    "description": "An Azure Pipeline Task to automate releases with Changesets",
-    "categories": [
-        "Azure Pipelines"
-    ],
-    "files": [
-        {
-            "path": "packages/changesets-task"
-        }
-    ],
-    "contributions": [
-        {
-            "id": "changesets-release-task",
-            "type": "ms.vss-distributed-task.task",
-            "targets": [
-                "ms.vss-distributed-task.tasks"
-            ],
-            "properties": {
-                "name": "packages/changesets-task"
-            }
-        }
-    ]
+  "manifestVersion": 1,
+  "id": "tothegist-build-tasks",
+  "name": "Tothegist Pipeline Tasks",
+  "version": "0.0.1",
+  "publisher": "tothegist",
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "description": "An Azure Pipeline Task to automate releases with Changesets",
+  "categories": [
+    "Azure Pipelines"
+  ],
+  "files": [
+    {
+      "path": "packages/changesets-task"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "changesets-release-task",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "packages/changesets-task"
+      }
+    }
+  ]
 }
