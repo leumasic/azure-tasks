@@ -8,6 +8,17 @@ import { patchOctokit } from "./githubRequests";
 
 async function run() {
   try {
+    const kit = new Octokit();
+
+    patchOctokit(kit);
+
+    const searchQuery = `repo:leumasic/azure-tasks+state:open+head:changesets/master+base:master`;
+    const results = await kit.search.issuesAndPullRequests({
+      q: searchQuery,
+    });
+
+    console.log(results);
+
     const connection = tl.getInput("githubConnection", true);
     const githubToken = tl.getEndpointAuthorizationParameter(
       connection!,
