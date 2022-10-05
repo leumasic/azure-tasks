@@ -1,4 +1,4 @@
-import * as ap from 'azure-pipelines-task-lib';
+import * as ap from "azure-pipelines-task-lib";
 import { execWithOutput } from "./utils";
 
 export const setupUser = async () => {

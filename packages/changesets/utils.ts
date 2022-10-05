@@ -1,4 +1,4 @@
-import * as ap from 'azure-pipelines-task-lib';
+import * as ap from "azure-pipelines-task-lib";
 import * as tl from "azure-pipelines-task-lib/task";
 import unified from "unified";
 import remarkParse from "remark-parse";

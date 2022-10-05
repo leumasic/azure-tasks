@@ -1,8 +1,10 @@
 import * as tl from "azure-pipelines-task-lib/task";
+import { Octokit } from "@octokit/rest";
 import fs from "fs-extra";
 import * as gitUtils from "./gitUtils";
 import { runPublish, runVersion } from "./run";
 import readChangesetState from "./readChangesetState";
+import { patchOctokit } from "./githubRequests";
 
 async function run() {
   try {
@@ -21,6 +23,12 @@ async function run() {
       );
       return;
     }
+
+    const octokit = new Octokit({
+      auth: githubToken,
+    });
+
+    patchOctokit(octokit);
 
     const inputCwd = tl.getInput("cwd");
     if (inputCwd) {
@@ -69,7 +77,7 @@ async function run() {
 
         const result = await runPublish({
           script: publishScript!,
-          githubToken,
+          octokit,
           createGithubReleases: tl.getBoolInput("createGithubReleases"),
         });
 
@@ -100,7 +108,7 @@ async function run() {
 
         const { pullRequestNumber } = await runVersion({
           script: tl.getInput("version"),
-          githubToken,
+          octokit,
           prTitle,
           commitMessage,
           hasPublishScript,
