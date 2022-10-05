@@ -1,4 +1,4 @@
-import tl from "azure-pipelines-task-lib/task";
+import * as tl from "azure-pipelines-task-lib/task";
 import { exec } from "azure-pipelines-task-lib";
 import { Octokit } from "@octokit/rest";
 import fs from "fs-extra";

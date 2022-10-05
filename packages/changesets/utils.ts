@@ -1,5 +1,5 @@
-import tl from "azure-pipelines-task-lib/task";
-import { unified } from "unified";
+import * as tl from "azure-pipelines-task-lib/task";
+import unified from "unified";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
 import mdastToString from "mdast-util-to-string";
@@ -140,7 +140,7 @@ export function sortTheThings(
 }
 
 export const getVariableErrorMsg = (predefVar: string) =>
-  `Microsoft's ${predefVar} predefined variable(s) just got deprecated. Submit an issue to this task's repo.`;
+  `Microsoft's ${predefVar} predefined variable(s) got deprecated or is not found. Submit an issue to this task's repo.`;
 
 interface IRepoOwner {
   repo: string;
