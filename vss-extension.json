@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "build-tasks",
   "name": "Tothegist Pipeline Tasks",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "tothegist",
   "targets": [
     {
