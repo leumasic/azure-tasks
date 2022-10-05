@@ -2,9 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "include": ["index.ts"],
   "compilerOptions": {
-    "allowJs": true,
-    "lib": ["es2018"],
-    "module": "commonjs",
-    "target": "es2018"
+    "target": "es6",
+    "module": "commonjs"
   }
 }

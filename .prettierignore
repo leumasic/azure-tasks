@@ -5,3 +5,7 @@ changelog.md
 coverage
 build
 lib
+
+*.json
+*.js
+*.d.ts
