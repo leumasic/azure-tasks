@@ -35,6 +35,12 @@ async function run() {
       await gitUtils.setupUser();
     }
 
+    console.log("setting GitHub credentials");
+    await fs.writeFile(
+      `${process.env.HOME}/.netrc`,
+      `machine github.com\nlogin github-actions[bot]\npassword ${githubToken}`
+    );
+
     const { changesets } = await readChangesetState();
     const hasChangesets = changesets.length !== 0;
     const hasNonEmptyChangesets = changesets.some(
@@ -58,30 +64,8 @@ async function run() {
           "No changesets found, attempting to publish any unpublished packages"
         );
 
-        const userNpmrcPath = `${process.env.HOME}/.npmrc`;
-        if (fs.existsSync(userNpmrcPath)) {
-          console.log("Found existing user .npmrc file");
-          const userNpmrcContent: string = await fs.readFile(
-            userNpmrcPath,
-            "utf8"
-          );
-          const authLine = userNpmrcContent.split("\n").find((line) => {
-            // check based on https://github.com/npm/cli/blob/8f8f71e4dd5ee66b3b17888faad5a7bf6c657eed/test/lib/adduser.js#L103-L105
-            return /^\s*\/\/registry\.npmjs\.org\/:[_-]authToken=/i.test(line);
-          });
-
-          if (authLine) {
-            console.log(
-              "Found existing auth token for the npm registry in the user .npmrc file"
-            );
-          } else {
-            tl.setResult(tl.TaskResult.Failed, "Didn't find existing auth token for the npm registry in the user .npmrc file");
-            return;
-          }
-        } else {
-          tl.setResult(tl.TaskResult.Failed, "No user .npmrc file found.");
-          return;
-        }
+        // User is expected to authenticate their npm registry prior to running
+        // this task
 
         const result = await runPublish({
           script: publishScript!,
