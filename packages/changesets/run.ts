@@ -360,8 +360,6 @@ export async function runVersion({
     prBodyMaxCharacters,
   });
 
-  console.log(searchResult);
-
   if (searchResult.data.items.length === 0) {
     console.log("creating pull request");
     const { data: newPullRequest } = await octokit.pulls.create({
@@ -371,6 +369,8 @@ export async function runVersion({
       body: prBody,
       ...repoOwnerObject,
     });
+
+    console.log(newPullRequest);
 
     return {
       pullRequestNumber: newPullRequest.number,
