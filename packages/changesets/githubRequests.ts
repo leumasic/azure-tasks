@@ -86,6 +86,8 @@ export function patchOctokit(octokit: Octokit): Octokit {
 
     const { owner, repo, base, head, body, title } = params;
 
+    console.log(`${githubBaseUrl}/repos/${owner}/${repo}/pulls`)
+
     const response = await nodeFetch(
       `${githubBaseUrl}/repos/${owner}/${repo}/pulls`,
       {
