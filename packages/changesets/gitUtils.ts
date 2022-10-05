@@ -1,9 +1,9 @@
-import { exec } from "azure-pipelines-task-lib";
+import * as ap from 'azure-pipelines-task-lib';
 import { execWithOutput } from "./utils";
 
 export const setupUser = async () => {
-  await exec("git", ["config", "user.name", `"github-actions[bot]"`]);
-  await exec("git", [
+  await ap.exec("git", ["config", "user.name", `"github-actions[bot]"`]);
+  await ap.exec("git", [
     "config",
     "user.email",
     `"github-actions[bot]@users.noreply.github.com"`,
@@ -11,14 +11,14 @@ export const setupUser = async () => {
 };
 
 export const pullBranch = async (branch: string) => {
-  await exec("git", ["pull", "origin", branch]);
+  await ap.exec("git", ["pull", "origin", branch]);
 };
 
 export const push = async (
   branch: string,
   { force }: { force?: boolean } = {}
 ) => {
-  await exec(
+  await ap.exec(
     "git",
     ["push", "origin", `HEAD:${branch}`, force && "--force"].filter<string>(
       Boolean as any
@@ -27,7 +27,7 @@ export const push = async (
 };
 
 export const pushTags = async () => {
-  await exec("git", ["push", "origin", "--tags"]);
+  await ap.exec("git", ["push", "origin", "--tags"]);
 };
 
 export const switchToMaybeExistingBranch = async (branch: string) => {
@@ -38,7 +38,7 @@ export const switchToMaybeExistingBranch = async (branch: string) => {
     .toString()
     .includes(`Switched to a new branch '${branch}'`);
   if (isCreatingBranch) {
-    await exec("git", ["checkout", "-b", branch]);
+    await ap.exec("git", ["checkout", "-b", branch]);
   }
 };
 
@@ -46,12 +46,12 @@ export const reset = async (
   pathSpec: string,
   mode: "hard" | "soft" | "mixed" = "hard"
 ) => {
-  await exec("git", ["reset", `--${mode}`, pathSpec]);
+  await ap.exec("git", ["reset", `--${mode}`, pathSpec]);
 };
 
 export const commitAll = async (message: string) => {
-  await exec("git", ["add", "."]);
-  await exec("git", ["commit", "-m", message]);
+  await ap.exec("git", ["add", "."]);
+  await ap.exec("git", ["commit", "-m", message]);
 };
 
 export const checkIfClean = async (): Promise<boolean> => {

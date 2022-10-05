@@ -75,20 +75,12 @@ async function run() {
               "Found existing auth token for the npm registry in the user .npmrc file"
             );
           } else {
-            console.log(
-              "Didn't find existing auth token for the npm registry in the user .npmrc file, creating one"
-            );
-            fs.appendFileSync(
-              userNpmrcPath,
-              `\n//registry.npmjs.org/:_authToken=${process.env.NPM_TOKEN}\n`
-            );
+            tl.setResult(tl.TaskResult.Failed, "Didn't find existing auth token for the npm registry in the user .npmrc file");
+            return;
           }
         } else {
-          console.log("No user .npmrc file found, creating one");
-          fs.writeFileSync(
-            userNpmrcPath,
-            `//registry.npmjs.org/:_authToken=${process.env.NPM_TOKEN}\n`
-          );
+          tl.setResult(tl.TaskResult.Failed, "No user .npmrc file found.");
+          return;
         }
 
         const result = await runPublish({
