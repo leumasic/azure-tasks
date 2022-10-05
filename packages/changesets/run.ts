@@ -370,8 +370,6 @@ export async function runVersion({
       ...repoOwnerObject,
     });
 
-    console.log(newPullRequest);
-
     return {
       pullRequestNumber: newPullRequest.number,
     };
