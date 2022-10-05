@@ -1,4 +1,4 @@
-import tl from "azure-pipelines-task-lib/task";
+import * as tl from "azure-pipelines-task-lib/task";
 import fs from "fs-extra";
 import * as gitUtils from "./gitUtils";
 import { runPublish, runVersion } from "./run";
