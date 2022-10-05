@@ -1,6 +1,6 @@
 {
   "name": "changesets",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "An Azure Pipeline Task to automate releases with Changesets",
   "author": "leumasic <leumasic@outlook.com>",
   "repository": {
@@ -9,6 +9,7 @@
     "directory": "packages/changesets"
   },
   "devDependencies": {
+    "@types/fs-extra": "^5.0.4",
     "@types/node-fetch": "^2.6.2",
     "@types/q": "^1.5.5",
     "@types/semver": "^7.3.12"

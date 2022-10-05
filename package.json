@@ -15,7 +15,6 @@
     "package": "tfx extension create --root . --output-path dist --manifest-globs vss-extension.json"
   },
   "devDependencies": {
-    "@types/fs-extra": "^5.0.4",
     "@types/node": "^8.10.61",
     "@changesets/cli": "^2.24.4",
     "@typescript-eslint/eslint-plugin": "latest",

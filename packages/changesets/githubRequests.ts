@@ -17,15 +17,22 @@ export function patchOctokit(octokit: Octokit): Octokit {
       `${githubBaseUrl}/search/issues?q=${params.q}`,
       {
         method: "GET",
-        headers: {
-          Authorization: "token " + token,
-        },
+        ...(token && {
+          headers: {
+            Authorization: "token " + token,
+          },
+        }),
       }
     );
 
-    const issuesAndPullRequests = await response.json();
+    const data = await response.json();
 
-    return issuesAndPullRequests;
+    return {
+      data,
+      headers: response.headers,
+      status: response.status,
+      url: response.url,
+    };
   };
 
   octokit.repos.createRelease = async (
@@ -49,15 +56,22 @@ export function patchOctokit(octokit: Octokit): Octokit {
           body,
           prerelease,
         }),
-        headers: {
-          Authorization: "token " + token,
-        },
+        ...(token && {
+          headers: {
+            Authorization: "token " + token,
+          },
+        }),
       }
     );
 
-    const release = await response.json();
+    const data = await response.json();
 
-    return release;
+    return {
+      data,
+      headers: response.headers,
+      status: response.status,
+      url: response.url,
+    };
   };
 
   octokit.pulls.create = async (
@@ -81,15 +95,22 @@ export function patchOctokit(octokit: Octokit): Octokit {
           title,
           body,
         }),
-        headers: {
-          Authorization: "token " + token,
-        },
+        ...(token && {
+          headers: {
+            Authorization: "token " + token,
+          },
+        }),
       }
     );
 
-    const pull = await response.json();
+    const data = await response.json();
 
-    return pull;
+    return {
+      data,
+      headers: response.headers,
+      status: response.status,
+      url: response.url,
+    };
   };
 
   octokit.pulls.update = async (
@@ -112,15 +133,22 @@ export function patchOctokit(octokit: Octokit): Octokit {
           title,
           body,
         }),
-        headers: {
-          Authorization: "token " + token,
-        },
+        ...(token && {
+          headers: {
+            Authorization: "token " + token,
+          },
+        }),
       }
     );
 
-    const pull = await response.json();
+    const data = await response.json();
 
-    return pull;
+    return {
+      data,
+      headers: response.headers,
+      status: response.status,
+      url: response.url,
+    };
   };
 
   return octokit;
