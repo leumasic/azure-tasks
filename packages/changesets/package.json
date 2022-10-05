@@ -1,6 +1,6 @@
 {
   "name": "changesets",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "An Azure Pipeline Task to automate releases with Changesets",
   "author": "leumasic <leumasic@outlook.com>",
   "repository": {
