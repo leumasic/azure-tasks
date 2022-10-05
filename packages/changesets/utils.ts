@@ -152,7 +152,7 @@ export function getRepoOwnerObject(): IRepoOwner {
   if (!ownerSlashRepo)
     throw new Error(getVariableErrorMsg("Build.Repository.Name"));
 
-  const [repo, owner] = ownerSlashRepo.split("/");
+  const [owner, repo] = ownerSlashRepo.split("/");
 
   if (!repo || !owner)
     throw new Error(
