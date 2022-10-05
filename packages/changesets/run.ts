@@ -1,5 +1,5 @@
 import * as tl from "azure-pipelines-task-lib/task";
-import * as ap from 'azure-pipelines-task-lib';
+import * as ap from "azure-pipelines-task-lib";
 import { Octokit } from "@octokit/rest";
 import fs from "fs-extra";
 import { getPackages, Package } from "@manypkg/get-packages";
@@ -65,7 +65,7 @@ const createRelease = async (
 
 type PublishOptions = {
   script: string;
-  githubToken: string;
+  octokit: Octokit;
   createGithubReleases: boolean;
   cwd?: string;
 };
@@ -83,13 +83,10 @@ type PublishResult =
 
 export async function runPublish({
   script,
-  githubToken,
+  octokit,
   createGithubReleases,
   cwd = process.cwd(),
 }: PublishOptions): Promise<PublishResult> {
-  const octokit = new Octokit({
-    auth: githubToken,
-  });
   const [publishCommand, ...publishArgs] = script.split(/\s+/);
 
   const changesetPublishOutput = await execWithOutput(
@@ -258,7 +255,7 @@ export async function getVersionPrBody({
 
 type VersionOptions = {
   script?: string;
-  githubToken: string;
+  octokit: Octokit;
   cwd?: string;
   prTitle: string;
   commitMessage: string;
@@ -272,7 +269,7 @@ type RunVersionResult = {
 
 export async function runVersion({
   script,
-  githubToken,
+  octokit,
   cwd = process.cwd(),
   prTitle,
   commitMessage,
@@ -291,9 +288,6 @@ export async function runVersion({
     );
 
   const versionBranch = `changeset-release/${branch}`;
-  const octokit = new Octokit({
-    auth: githubToken,
-  });
   const { preState } = await readChangesetState(cwd);
 
   await gitUtils.switchToMaybeExistingBranch(versionBranch);
