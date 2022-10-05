@@ -56,11 +56,12 @@ export function patchOctokit(octokit: Octokit): Octokit {
           body,
           prerelease,
         }),
-        ...(token && {
-          headers: {
+        headers: {
+          "Content-Type": "application/json",
+          ...(token && {
             Authorization: "token " + token,
-          },
-        }),
+          })
+        }
       }
     );
 
@@ -95,11 +96,12 @@ export function patchOctokit(octokit: Octokit): Octokit {
           title,
           body,
         }),
-        ...(token && {
-          headers: {
+        headers: {
+          "Content-Type": "application/json",
+          ...(token && {
             Authorization: "token " + token,
-          },
-        }),
+          })
+        }
       }
     );
 
@@ -133,11 +135,12 @@ export function patchOctokit(octokit: Octokit): Octokit {
           title,
           body,
         }),
-        ...(token && {
-          headers: {
+        headers: {
+          "Content-Type": "application/json",
+          ...(token && {
             Authorization: "token " + token,
-          },
-        }),
+          })
+        }
       }
     );
 
