@@ -18,6 +18,9 @@
       "path": "packages/changesets"
     }
   ],
+  "icons": {
+    "default": "icon.png"
+  },
   "contributions": [
     {
       "id": "changesets-release-task",

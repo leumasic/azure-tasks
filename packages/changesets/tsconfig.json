@@ -3,7 +3,8 @@
   "include": ["index.ts"],
   "compilerOptions": {
     "allowJs": true,
-    "module": "ES2020",
-    "target": "ES2020"
+    "lib": ["es2018"],
+    "module": "commonjs",
+    "target": "es2018"
   }
 }
