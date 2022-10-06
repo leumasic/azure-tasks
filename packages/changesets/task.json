@@ -15,9 +15,9 @@
   ],
   "author": "leumasic",
   "version": {
-    "Major": 0,
+    "Major": 1,
     "Minor": 0,
-    "Patch": 13
+    "Patch": 0
   },
   "instanceNameFormat": "Changesets",
   "inputs": [
@@ -103,7 +103,7 @@
     }
   ],
   "execution": {
-    "Node10": {
+    "Node": {
       "target": "index.js"
     }
   }

@@ -1,6 +1,6 @@
-import * as ap from "azure-pipelines-task-lib";
-import * as tl from "azure-pipelines-task-lib/task";
-import unified from "unified";
+import { exec } from "azure-pipelines-task-lib";
+import tl from "azure-pipelines-task-lib/task";
+import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
 import mdastToString from "mdast-util-to-string";
@@ -113,7 +113,7 @@ export async function execWithOutput(
     },
   });
 
-  const code = await ap.exec(command, args, {
+  const code = await exec(command, args, {
     outStream,
     errStream,
     ...options,

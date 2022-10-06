@@ -1,5 +1,5 @@
-import * as tl from "azure-pipelines-task-lib/task";
-import * as ap from "azure-pipelines-task-lib";
+import tl from "azure-pipelines-task-lib/task";
+import { exec } from "azure-pipelines-task-lib";
 import { Octokit } from "@octokit/rest";
 import fs from "fs-extra";
 import { getPackages, Package } from "@manypkg/get-packages";
@@ -297,13 +297,13 @@ export async function runVersion({
 
   if (script) {
     const [versionCommand, ...versionArgs] = script.split(/\s+/);
-    await ap.exec(versionCommand, versionArgs, { cwd });
+    await exec(versionCommand, versionArgs, { cwd });
   } else {
     const changesetsCliPkgJson = requireChangesetsCliPkgJson(cwd);
     const cmd = semver.lt(changesetsCliPkgJson.version, "2.0.0")
       ? "bump"
       : "version";
-    await ap.exec("node", [resolveFrom(cwd, "@changesets/cli/bin.js"), cmd], {
+    await exec("node", [resolveFrom(cwd, "@changesets/cli/bin.js"), cmd], {
       cwd,
     });
   }

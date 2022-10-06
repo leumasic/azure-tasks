@@ -1,10 +1,9 @@
-import * as tl from "azure-pipelines-task-lib/task";
+import tl from "azure-pipelines-task-lib/task";
 import { Octokit } from "@octokit/rest";
 import fs from "fs-extra";
 import * as gitUtils from "./gitUtils";
 import { runPublish, runVersion } from "./run";
 import readChangesetState from "./readChangesetState";
-import { patchOctokit } from "./githubRequests";
 
 async function run() {
   try {
@@ -27,8 +26,6 @@ async function run() {
     const octokit = new Octokit({
       auth: githubToken,
     });
-
-    patchOctokit(octokit);
 
     const inputCwd = tl.getInput("cwd");
     if (inputCwd) {
